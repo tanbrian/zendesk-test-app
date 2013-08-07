@@ -14,9 +14,9 @@ class ZendeskClient < ZendeskAPI::Client
 
   def self.instance 
     @instance ||= new do |config|
-      config.url = "<- https://company167.zendesk.com/api/v2 ->"
-      config.username = "zendesker@gmail.com"
-      config.password = "zd4271"
+      config.url = ENV['ZD_URL']
+      config.username = ENV['ZD_USER'] 
+      config.password = ENV['ZD_PASS'] 
       config.retry = true
       config.logger = Rails.logger
     end
