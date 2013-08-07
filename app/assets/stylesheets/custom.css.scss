@@ -1,5 +1,38 @@
 @import 'bootstrap';
 
+/* universal */
+
 .center { 
   text-align: center;
+}
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+input {
+  height: auto !important;
+}
+
+/* mixins */
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* debugger */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
 }
