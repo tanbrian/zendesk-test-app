@@ -4,7 +4,7 @@
 <p>A very, very basic help center to send issues to the zendesk client.</p>
 
 <div class='row'>
-  <div class='span6 offset3'>
+  <div class='span6 offset3 form-group'>
     <%= form_tag(tickets_path) do %>
       <%= label_tag :name, 'Name' %>
       <%= text_field_tag :name %>
@@ -18,7 +18,7 @@
       <%= label_tag :issue, 'Issue' %>
       <%= text_area_tag :issue, 'Describe the issue' %>
 
-      <%= submit_tag 'Create Ticket', class: 'btn btn-default btn-block' %>
+      <%= submit_tag 'Create Ticket', class: 'btn btn-default btn-block', id: 'submit-block' %>
     <% end %>
   </div>
 </div>

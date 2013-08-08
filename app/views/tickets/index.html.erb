@@ -1,4 +1,11 @@
 <%= provide :title, 'Tickets' %>
-<% @tickets.each do |ticket| %>
-  <p><%= link_to 'something', '#' %></p>
-<% end %>
+<table class='table'>
+  <% @tickets.each do |ticket| %> 
+    <tr>
+      <td><%= ticket.requester.name %></td>
+      <td><%= ticket.subject %></td>
+      <td><%= ticket.created_at %></td>
+      <td><%= ticket.updated_at %></td>
+    </tr>
+  <% end %>
+</table>

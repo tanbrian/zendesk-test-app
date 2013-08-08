@@ -9,11 +9,11 @@ class TicketsController < ApplicationController
   def create
     options = { subject: params[:subject], comment: { value: params[:issue] }, 
                 requester: params[:email], priority: 'normal' }
-    ZendeskAPI::Ticket.create(client, options)
+    @ticket = ZendeskAPI::Ticket.create(client, options)
   end
 
   def index
-    @tickets = client.tickets
+    @tickets = client.tickets.fetch! reload: true
   end
 
 end
