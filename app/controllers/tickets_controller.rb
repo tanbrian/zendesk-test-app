@@ -8,7 +8,7 @@ class TicketsController < ApplicationController
 
   def create
     options = { subject: params[:subject], comment: { value: params[:issue] }, 
-                requester: params[:email] }
+                requester: params[:email], priority: 'normal' }
     ZendeskAPI::Ticket.create(client, options)
   end
 

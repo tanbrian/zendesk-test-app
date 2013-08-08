@@ -23,6 +23,6 @@ class ZendeskClient < ZendeskAPI::Client
   end
 
   def tickets
-    search query: "requester:#{'user@test.com'}"
+    search query: "priority:#{'normal'}"
   end
 end

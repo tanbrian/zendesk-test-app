@@ -1,3 +1,4 @@
+<%= provide :title, '' %>
 <h1 class='center'>Help Center</h1>
 <p>This is the root URL for the Zendesk test app.</p>
 <p>A very, very basic help center to send issues to the zendesk client.</p>
@@ -17,7 +18,7 @@
       <%= label_tag :issue, 'Issue' %>
       <%= text_area_tag :issue, 'Describe the issue' %>
 
-      <%= submit_tag 'Create Ticket', class: 'btn btn-large btn-primary' %>
+      <%= submit_tag 'Create Ticket', class: 'btn btn-default btn-block' %>
     <% end %>
   </div>
 </div>
