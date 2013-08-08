@@ -22,7 +22,7 @@ class ZendeskClient < ZendeskAPI::Client
     end
   end
 
-  def tickets(email)
-    search query: "requester:#{email}"
+  def tickets
+    search query: "requester:#{'user@test.com'}"
   end
 end

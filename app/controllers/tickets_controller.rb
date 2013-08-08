@@ -11,4 +11,9 @@ class TicketsController < ApplicationController
                 requester: params[:email] }
     ZendeskAPI::Ticket.create(client, options)
   end
+
+  def index
+    @tickets = client.tickets
+  end
+
 end
