@@ -7,10 +7,10 @@ describe 'ticket pages' do
   describe 'new ticket page' do
     before do 
       visit root_path
-      fill_in 'Name', with: 'Test User'
+      fill_in 'Name', with: 'Billybob Joe'
       fill_in 'Email', with: 'user@test.com'
-      fill_in 'Subject', with: 'Test Subject'
-      fill_in 'Issue', with: 'Test Issue'
+      fill_in 'Subject', with: 'Oh no!'
+      fill_in 'Issue', with: 'My computer spontaneously blew up!'
       click_button 'Create Ticket'
     end
 

@@ -1,3 +1,2 @@
 <%= provide :title, 'Create' %>
-<p>Ticket created.</p>
-<%= link_to 'Back to help center', root_url %>
+<%= link_to 'Ticket details.', ticket_path(@ticket.id) %>

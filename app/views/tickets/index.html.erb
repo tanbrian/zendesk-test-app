@@ -1,11 +1,22 @@
 <%= provide :title, 'Tickets' %>
+<h2 class='center'>Tickets</h2>
 <table class='table'>
-  <% @tickets.each do |ticket| %> 
-    <tr>
-      <td><%= ticket.requester.name %></td>
-      <td><%= ticket.subject %></td>
-      <td><%= ticket.created_at %></td>
-      <td><%= ticket.updated_at %></td>
-    </tr>
-  <% end %>
+  <thead>
+    <th>Ticket ID</th>
+    <th>Requester</th>
+    <th>Subject</th>
+    <th>Created At</th>
+  </thead>  
+  <tbody>
+    <% @tickets.each do |ticket| %> 
+      <% time_in_pst = Time.parse("#{ticket.created_at} UTC").in_time_zone("Pacific Time (US & Canada)") %>
+      <tr>
+        <td><%= ticket.id %></td>
+        <td><%= ticket.requester.name %></td>
+        <td><%= ticket.subject %></td>
+        <td><%= time_in_pst.strftime("%l:%M%P on %a %b %-d %Y") %></td>
+        <td><%= link_to 'Show ticket details', ticket_path(ticket.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
