@@ -1,3 +1,25 @@
 <h2 class='center'>Ticket #<%= @id %></h2>
-<%= @id %>
-<%= @comments %>
+<div class='row'>
+  <div class='span4'>
+    <h3>Ticket details</h3>
+    <ul>
+      <li>Ticket ID: <%= @id %></li>
+      <li>Status: <%= @ticket.status.capitalize %></li>
+      <li>Subject: <%= @ticket.subject %></li>
+    </ul>
+  </div>
+  <div class='span8'>
+    <h3 class='center'>Comments</h3>
+    <ol class='comments'>
+      <% @comments.each do |comment| %>
+      <li>
+        <span class='content'><%= comment.body %></span>        
+        <small class='timestamp'>
+          Posted <%= time_ago_in_words(comment.created_at) %> ago.
+        </small>
+      </li>
+      <% end %>
+    </ol>
+    <%= render 'comment_form' %>
+  </div>
+</div>

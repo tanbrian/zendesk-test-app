@@ -1,0 +1,5 @@
+<%= form_tag(ticket_path(@id), method: :put) do %>
+  <%= label_tag :comment, 'Add comment' %>
+  <%= text_area_tag :comment, nil %>
+  <%= submit_tag 'Add comment', class: 'btn btn-default btn-block' %>
+<% end %>

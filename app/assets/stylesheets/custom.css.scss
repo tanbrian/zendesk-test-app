@@ -1,5 +1,7 @@
 @import 'bootstrap';
 
+$grayLight: #e8e8e8;
+
 /* universal */
 
 .center { 
@@ -39,7 +41,7 @@ input {
   box-sizing: border-box;
 }
 
-/* debugger */
+/* miscellaneous */
 
 .debug_dump {
   clear: both;
@@ -47,4 +49,17 @@ input {
   width: 100%;
   margin-top: 45px;
   @include box_sizing;
+}
+
+.comments {
+  list-style: none;
+
+  li {
+    padding: 10px 0px 10px 0px;
+    border-top: 1px solid $grayLight;
+  }
+}
+
+.timestamp {
+  float: right;
 }
