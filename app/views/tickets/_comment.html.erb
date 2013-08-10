@@ -1,0 +1,9 @@
+<li>
+  <div>
+    Comment ID: <%= comment.id %>
+  </div> 
+  <div class='content'>
+    <%= comment.body %> 
+    <small class='timestamp'>Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
+  </div>
+</li>

@@ -27,13 +27,14 @@ class TicketsController < ApplicationController
     @id = params[:id]
     @ticket = ZendeskAPI::Ticket.find(client, id: @id)
     @comments = client.requests.find(id: @id).comments
+    @users = client.users
   end
 
   def update
     @comment = params[:comment]
     @request = client.requests.find(id: params[:id]) 
     @request.comment = { body: @comment }
-    @request.save
+    @request.save 
     redirect_to ticket_path(id: params[:id])
   end 
 
