@@ -14,8 +14,8 @@ class TicketsController < ApplicationController
       @ticket = ZendeskAPI::Ticket.create(client, options)
       redirect_to ticket_path(@ticket.id)
     else
-      flash[:error] = 'Something went wrong. Try again.'
-      redirect_to root_url
+      flash.now[:error] = 'Something went wrong. Try again.'
+      render 'new'
     end
   end
 
