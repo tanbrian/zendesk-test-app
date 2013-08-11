@@ -33,6 +33,13 @@ input {
   height: auto !important;
 }
 
+#error-explanation {
+  color: #f00;
+  ul {
+    list-style: disc;
+  }
+}
+
 /* mixins */
 
 @mixin box_sizing {

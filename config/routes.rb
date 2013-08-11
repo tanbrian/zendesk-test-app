@@ -1,8 +1,12 @@
 ZendeskTestApp::Application.routes.draw do
 
+  get "users/new"
   root 'tickets#new'
 
+  match '/signup', to: 'users#new', via: 'get'
+
   resources :tickets
+  resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
