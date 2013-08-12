@@ -2,6 +2,7 @@ require 'zendesk_api'
 require 'json'
 
 class TicketsController < ApplicationController
+  before_action :signin_user
 
   def new
   end
@@ -42,5 +43,12 @@ class TicketsController < ApplicationController
 
   def ticket_valid?(values)
     values.has_value?('') ? false : true
+  end
+
+  def signin_user
+    if !signed_in?
+      flash[:error] = 'Sign in first.'
+      redirect_to signin_path
+    end
   end
 end

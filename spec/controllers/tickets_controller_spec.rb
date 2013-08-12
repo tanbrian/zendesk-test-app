@@ -1,10 +1,12 @@
 require 'spec_helper'
+include SessionsHelper
 
 describe TicketsController do
 
   let(:ticket) { double('ZendeskAPI::Ticket', id: 1) } 
 
-  describe '#create' do
+  describe '#create when signed in' do
+    before { controller.stub(:signin_user) }
 
     context 'with valid information' do 
       before do
@@ -27,10 +29,12 @@ describe TicketsController do
     end
   end 
 
-  describe '#index' do
-    it 'renders the tickets page' do
-      get :index
-      response.should be_success
+  describe '#create when not signed in' do
+    before do 
+      ZendeskAPI::Ticket.stub(:create).and_return ticket
+      post :create
     end
+
+    specify { response.should redirect_to signin_path }
   end
 end
