@@ -18,5 +18,30 @@ feature 'signup' do
   scenario 'with invalid information' do
     expect { click_button submit }.not_to change(User, :count).by(1)    
     expect(page).to have_content 'error'
+    expect(page).to have_selector 'div.alert.alert-error'
+  end
+end
+
+feature 'signin' do
+  given(:submit) { 'Sign in' }
+  given(:user) { FactoryGirl.create(:user) }
+
+  background do
+    visit signin_path
+    user.save
+  end
+
+  scenario 'with valid information' do
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_button submit
+
+    expect(page).to have_selector 'div.alert.alert-success'
+    expect(page).to have_content 'Help Center'
+  end
+
+  scenario 'with invalid information' do
+    click_button submit 
+    expect(page).to have_selector 'div.alert.alert-error'
   end
 end

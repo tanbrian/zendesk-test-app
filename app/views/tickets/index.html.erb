@@ -1,5 +1,5 @@
 <%= provide :title, 'Tickets' %>
-<h2 class='center'>Tickets</h2>
+<h2 class='center'>My Tickets</h2>
 <table class='table'>
   <thead>
     <th>Ticket ID</th>
@@ -9,13 +9,15 @@
   </thead>  
   <tbody>
     <% @tickets.each do |ticket| %> 
-      <tr>
-        <td><%= ticket.id %></td>
-        <td><%= ticket.requester.name %></td>
-        <td><%= ticket.subject %></td>
-        <td><%= utc_to_pst(ticket.created_at) %></td>
-        <td><%= link_to 'Show ticket details', ticket_path(ticket.id) %></td>
-      </tr>
+      <% if ticket.requester.email == @current_user.email %>
+        <tr>
+          <td><%= ticket.id %></td>
+          <td><%= ticket.requester.name %></td>
+          <td><%= ticket.subject %></td>
+          <td><%= utc_to_pst(ticket.created_at) %></td>
+          <td><%= link_to 'Show ticket details', ticket_path(ticket.id) %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

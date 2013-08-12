@@ -22,6 +22,7 @@ class TicketsController < ApplicationController
   end
 
   def index
+    @current_user = current_user
     @tickets = client.tickets.fetch!(reload: true)
   end
 
@@ -29,7 +30,6 @@ class TicketsController < ApplicationController
     @id = params[:id]
     @ticket = ZendeskAPI::Ticket.find(client, id: @id)
     @comments = client.requests.find(id: @id).comments
-    @users = client.users
   end
 
   def update
