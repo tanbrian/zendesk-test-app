@@ -2,14 +2,15 @@ require 'zendesk_api'
 require 'json'
 
 class TicketsController < ApplicationController
-  before_action :signin_user
+  before_action :signin_user 
 
-  def new
+  def new    
   end
 
-  def create
+  def create  
+    @current_user = current_user
     options = { subject: params[:subject], comment: { value: params[:issue] }, 
-                requester: params[:email], priority: 'normal' }
+                requester: @current_user.email, priority: 'normal' }
     if ticket_valid? options
       flash[:success] = 'Ticket created.'
       @ticket = ZendeskAPI::Ticket.create(client, options)
