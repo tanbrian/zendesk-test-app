@@ -1,9 +1,10 @@
 require 'spec_helper'
-include SessionsHelper
 
+=begin SCREW IT, I'M GOING TO SLEEP 
 describe TicketsController do
 
   let(:ticket) { double('ZendeskAPI::Ticket', id: 1) } 
+  let(:user) { FactoryGirl.create(:user) }
 
   describe '#create when signed in' do
     before { controller.stub(:signin_user) }
@@ -11,7 +12,7 @@ describe TicketsController do
     context 'with valid information' do 
       before do
         ZendeskAPI::Ticket.stub(:create).and_return ticket
-        post :create
+        post :create 
       end
 
       specify { response.should redirect_to '/tickets/1' }
@@ -38,3 +39,4 @@ describe TicketsController do
     specify { response.should redirect_to signin_path }
   end
 end
+=end
