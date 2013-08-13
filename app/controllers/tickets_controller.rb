@@ -30,6 +30,7 @@ class TicketsController < ApplicationController
     @ticket = ZendeskAPI::Ticket.find(client, id: @id)
     @comments = client.requests.find(id: @id).comments
     @users = client.users
+    @user = client.current_user
   end
 
   def update
