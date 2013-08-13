@@ -3,12 +3,12 @@ require 'json'
 
 class TicketsController < ApplicationController
   before_action :signin_user 
+  before_filter :get_current_user
 
   def new    
   end
 
   def create  
-    @current_user = current_user
     options = { subject: params[:subject], comment: { value: params[:issue] }, 
                 requester: @current_user.email, priority: 'normal' }
     if ticket_valid? options
@@ -22,7 +22,6 @@ class TicketsController < ApplicationController
   end
 
   def index
-    @current_user = current_user
     @tickets = client.tickets.fetch!(reload: true)
   end
 
@@ -30,14 +29,18 @@ class TicketsController < ApplicationController
     @id = params[:id]
     @ticket = ZendeskAPI::Ticket.find(client, id: @id)
     @comments = client.requests.find(id: @id).comments
+    @users = client.users
   end
 
   def update
-    @comment = params[:comment]
-    @request = client.requests.find(id: params[:id]) 
-    @request.comment = { body: @comment }
+    @comment_body = params[:comment]
+    @request = client.requests.find(id: params[:id])     
+    @request.comment = { body: @comment_body }  
+
+    @user = client.current_user
+
     @request.save 
-    redirect_to ticket_path(id: params[:id])
+    #redirect_to ticket_path(id: params[:id])
   end 
 
   private
@@ -51,5 +54,9 @@ class TicketsController < ApplicationController
       flash[:error] = 'Sign in first.'
       redirect_to signin_path
     end
+  end
+
+  def get_current_user
+    @current_user = current_user
   end
 end

@@ -1,3 +1,4 @@
 <%= provide :title, 'Update' %>
-<p>Author ID: <%= @request.comment.author_id %></p>
-<p>Requester ID: <%= @request.requester_id %></p>
+<h1 class='center'>Ticket Updated.</h1>
+<%= link_to 'Ticket details', ticket_path(id: params[:id] ) %>
+<%= @user %>
