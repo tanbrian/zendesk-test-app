@@ -9,4 +9,8 @@ module ApplicationHelper
     pst = Time.parse("#{time} UTC").in_time_zone("Pacific Time (US & Canada)")
     pst.strftime("%l:%M%P on %a %b %-d %Y")
   end
+
+  def separate
+    puts '=' * 50
+  end
 end

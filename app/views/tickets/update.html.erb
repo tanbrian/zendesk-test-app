@@ -1,4 +1,13 @@
 <%= provide :title, 'Update' %>
 <h1 class='center'>Ticket Updated.</h1>
-<h3>Current user: <%= @user.name %></h3>
 <%= link_to 'Ticket details', ticket_path(id: params[:id] ) %>
+
+<h3><%= '=' * 50 %></h3>
+<%= request.authorization %>
+<h3><%= '=' * 50 %></h3>
+<%= request['Authorization'] %>
+
+curl -v -u user@test.com/token:HwY1WIILKaeq6Cln41DSQR6dJsSGEQ7WNTO4xbAh https://company167.zendesk.com/api/v2/requests/150.json -X PUT -d '{"request": {"comment":{"value":"And Zendesk, but that's not happening."}}}' -H "Content-Type:application/json"
+
+Basic dXNlckB0ZXN0LmNvbS90b2tlbjpId1kxV0lJTEthZXE2Q2xuNDFEU1FSNmRKc1NHRVE3V05UTzR4YkFo
+Basic dXNlckB0ZXN0LmNvbS90b2tlbjpId1kxV0lJTEthZXE2Q2xuNDFEU1FSNmRKc1NHRVE3V05UTzR4YkFo

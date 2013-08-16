@@ -1,5 +1,9 @@
 require 'zendesk_api'
 require 'json'
+require 'net/http'
+require 'net/https'
+require 'open-uri'
+require 'base64'
 
 class TicketsController < ApplicationController
   before_action :signin_user 
@@ -25,23 +29,28 @@ class TicketsController < ApplicationController
     @tickets = client.tickets.fetch!(reload: true)
   end
 
-  def show
+  def show 
     @id = params[:id]
     @ticket = ZendeskAPI::Ticket.find(client, id: @id)
     @comments = client.requests.find(id: @id).comments
     @users = client.users
-    @user = client.current_user
   end
 
   def update
+    @id = params[:id]
     @comment_body = params[:comment]
-    @request = client.requests.find(id: params[:id])     
-    @request.comment = { body: @comment_body }  
 
-    @user = client.current_user
+    uri = URI.parse "https://company167.zendesk.com/api/v2/requests/#{@id}.json"
+    http = Net::HTTP.new uri.host, uri.port
+    http.use_ssl = true
+    req = Net::HTTP::Put.new(uri.request_uri) 
+    req.body = '{"request": {"comment":{"value":' + "\"#{@comment_body}\"" + '}}}'
+    req['Content-Type'] = 'application/json'
+    credentials = Base64.encode64 "#{ENV['ZD_TOKEN']}"
+    req.basic_auth "#{@current_user.email}/token", "#{ENV['ZD_TOKEN']}"
+    response = http.request(req)
 
-    @request.save 
-    #redirect_to ticket_path(id: params[:id])
+    redirect_to ticket_path @id
   end 
 
   private
@@ -59,5 +68,9 @@ class TicketsController < ApplicationController
 
   def get_current_user
     @current_user = current_user
+  end
+
+  def separate
+    puts '=' * 50
   end
 end

@@ -33,9 +33,6 @@ gem 'jbuilder', '~> 1.2'
 # The Zendesk API client
 gem 'zendesk_api'
 
-# To use for SSO
-gem 'jwt'
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

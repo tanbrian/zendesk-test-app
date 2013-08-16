@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def client
     ZendeskClient.instance
-  end
+  end 
 end
 
 class ZendeskClient < ZendeskAPI::Client
@@ -18,7 +18,7 @@ class ZendeskClient < ZendeskAPI::Client
     @instance ||= new do |config|
       config.url = ENV['ZD_URL']
       config.username = ENV['ZD_USER'] 
-      config.password = ENV['ZD_PASS'] 
+      config.token = ENV['ZD_TOKEN'] 
       config.retry = true
       config.logger = Rails.logger
     end
