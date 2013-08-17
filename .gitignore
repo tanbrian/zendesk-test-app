@@ -15,5 +15,5 @@
 /log/*.log
 /tmp
 
-# Ignore file with Zendesk environment variables.
-/config/zendesk.rb
+# Ignore file with environment variables.
+/config/local_env.yml

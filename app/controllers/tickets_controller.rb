@@ -12,7 +12,7 @@ class TicketsController < ApplicationController
   def new    
   end
 
-  def create  
+  def create 
     options = { subject: params[:subject], comment: { value: params[:issue] }, 
                 requester: @current_user.email, priority: 'normal' }
     if ticket_valid? options
@@ -40,20 +40,24 @@ class TicketsController < ApplicationController
     @id = params[:id]
     @comment_body = params[:comment]
 
-    uri = URI.parse "https://company167.zendesk.com/api/v2/requests/#{@id}.json"
-    http = Net::HTTP.new uri.host, uri.port
-    http.use_ssl = true
-    req = Net::HTTP::Put.new(uri.request_uri) 
-    req.body = '{"request": {"comment":{"value":' + "\"#{@comment_body}\"" + '}}}'
-    req['Content-Type'] = 'application/json'
-    credentials = Base64.encode64 "#{ENV['ZD_TOKEN']}"
-    req.basic_auth "#{@current_user.email}/token", "#{ENV['ZD_TOKEN']}"
-    response = http.request(req)
+    http_response = comment_as_end_user @id, @current_user.email, @comment_body
 
     redirect_to ticket_path @id
   end 
 
   private
+
+  def comment_as_end_user(id, email, comment)
+    uri = URI.parse "https://company167.zendesk.com/api/v2/requests/#{id}.json"
+    http = Net::HTTP.new uri.host, uri.port
+    http.use_ssl = true
+    req = Net::HTTP::Put.new(uri.request_uri) 
+    req.body = '{"request": {"comment":{"value":' + "\"#{comment}\"" + '}}}'
+    req['Content-Type'] = 'application/json'
+    credentials = Base64.encode64 "#{ENV['ZD_TOKEN']}"
+    req.basic_auth "#{email}/token", "#{ENV['ZD_TOKEN']}"
+    http.request(req)
+  end
 
   def ticket_valid?(values)
     values.has_value?('') ? false : true
@@ -68,9 +72,5 @@ class TicketsController < ApplicationController
 
   def get_current_user
     @current_user = current_user
-  end
-
-  def separate
-    puts '=' * 50
   end
 end
