@@ -1,2 +1,44 @@
-== README
-Getting the Zendesk API working with a Rails app.
+== Zendesk Sample App
+
+=== Introduction
+
+This is a sample Rails app that integrates the Zendesk API for customer support. To use the app, a user first signs up. After signup, the user can then make tickets that go to the Zendesk backend. Provided the user is logged in, the user can view its existing tickets and update its tickets with comments. 
+
+User authentication was made from scratch, implementing the bcrypt-ruby gem and ActiveModel's <tt>has_secure_password</tt>. Updating the tickets and setting password of users upon creation is handled with <tt>Net::HTTP</tt> requests. Bootstrap and Sass is used for styling. The app has a test suite written with RSpec and Capybara, and ties RSpec with Guard and Spork for faster, automated tests, along with FactoryGirl in place of fixtures.
+
+=== Setup
+
+To get this app to run locally on your machine:
+
+<b>Clone the repository</b>
+  git clone https://github.com/tanbrian/zendesk_test_app.git
+
+<b>Install the bundle</b>
+  bundle install
+
+A Zendesk account will be necessary to run the app, along with an API token. This app uses environment variables to authenticate to Zendesk when creating users and updating tickets, so you will need to set your own values for the variables.
+
+<b>Make a file to hold the environment variables</b>
+  touch config/local_env.yml
+
+<b>Set the variables in local_env.yml</b>
+  ZD_URL: "https://yoursubdomain.zendesk.com"
+  ZD_USER: "your@email.com"
+  ZD_PASS: "yourpassword"
+  ZD_TOKEN: "yourapitoken"
+
+<b>Load the environment variables in your config/application.rb file</b>
+  config.before_configuration do
+    env_file = File.join(Rails.root, 'config', 'local_env.yml')
+    YAML.load(File.open(env_file)).each do |key, value|
+      ENV[key.to_s] = value
+    end if File.exists?(env_file)
+  end
+
+This app also uses a database to hold the information of signed-up users.
+
+<b>Migrate and prepare database</b>
+  rake db:migrate
+  rake test:prepare
+
+And that's it! Email me if you have any questions.
