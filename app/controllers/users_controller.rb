@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       @new_user = ZendeskAPI::User.create(client, options)
       @id = @new_user.id
 
-      uri = URI.parse "https://company167.zendesk.com/api/v2/users/#{@id}/password.json"
+      uri = URI.parse "https://sample93.zendesk.com/api/v2/users/#{@id}/password.json"
       http = Net::HTTP.new uri.host, uri.port
       http.use_ssl = true
       req = Net::HTTP::Put.new uri.request_uri
@@ -41,10 +41,6 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password,
                                   :password_confirmation)
-  end
-
-  def separate
-    puts '=' * 50
   end
 
 end

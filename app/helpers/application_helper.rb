@@ -10,7 +10,4 @@ module ApplicationHelper
     pst.strftime("%l:%M%P on %a %b %-d %Y")
   end
 
-  def separate
-    puts '=' * 50
-  end
 end

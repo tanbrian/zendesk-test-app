@@ -48,7 +48,7 @@ class TicketsController < ApplicationController
   private
 
   def comment_as_end_user(id, email, comment)
-    uri = URI.parse "https://company167.zendesk.com/api/v2/requests/#{id}.json"
+    uri = URI.parse "https://sample93.zendesk.com/api/v2/requests/#{id}.json"
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
     req = Net::HTTP::Put.new(uri.request_uri) 

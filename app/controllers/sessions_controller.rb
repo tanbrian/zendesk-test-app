@@ -20,7 +20,4 @@ class SessionsController < ApplicationController
     redirect_to signin_path
   end
 
-  def separate
-    puts '=' * 50
-  end
 end
