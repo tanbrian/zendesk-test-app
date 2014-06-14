@@ -26,6 +26,7 @@ A Zendesk account will be necessary to run the app, along with an API token. Thi
   ZD_USER: "your@email.com"
   ZD_PASS: "yourpassword"
   ZD_TOKEN: "yourapitoken"
+  ZD_DOMAIN: "yoursubdomain"
 
 <b>Load the environment variables in your config/application.rb file</b>
   config.before_configuration do
@@ -43,6 +44,6 @@ This app also uses a database to hold the information of signed-up users.
 
 And that's it! Email me if you have any questions.
 
-== Copyright
+=== License and Copyright 
 
 This software is licensed under the terms of the MIT License. Copyright © 2014 Brian Tan.

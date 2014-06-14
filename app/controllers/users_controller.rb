@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       @new_user = ZendeskAPI::User.create(client, options)
       @id = @new_user.id
 
-      uri = URI.parse "https://sample93.zendesk.com/api/v2/users/#{@id}/password.json"
+      uri = URI.parse "https://#{ENV['ZD_DOMAIN']}.zendesk.com/api/v2/users/#{@id}/password.json"
       http = Net::HTTP.new uri.host, uri.port
       http.use_ssl = true
       req = Net::HTTP::Put.new uri.request_uri
