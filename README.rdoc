@@ -4,7 +4,7 @@
 
 This is a sample Rails app that integrates the Zendesk API for customer support. To use the app, a user first signs up. After signup, the user can then make tickets that go to the Zendesk backend. Provided the user is logged in, the user can view its existing tickets and update its tickets with comments. 
 
-User authentication was made from scratch, implementing the bcrypt-ruby gem and ActiveModel's <tt>has_secure_password</tt>. Updating the tickets and setting password of users upon creation is handled with <tt>Net::HTTP</tt> requests. Bootstrap and Sass is used for styling. The app has a test suite written with RSpec and Capybara, and ties RSpec with Guard and Spork for faster, automated tests, along with FactoryGirl in place of fixtures.
+User authentication was made from scratch, implementing the bcrypt-ruby gem and ActiveModel's <tt>has_secure_password</tt>. Updating the tickets and setting password of users upon creation is handled with <tt>Net::HTTP</tt> requests. Bootstrap and Sass is used for styling. The app has a test suite written with RSpec and Capybara, and ties RSpec with Guard and Spork for faster, automated tests, along with FactoryGirl in place of fixtures. The production database uses PostGreSQL.
 
 === Setup
 
