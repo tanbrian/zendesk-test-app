@@ -2,9 +2,9 @@
 
 === Introduction
 
-This is a sample Rails app that integrates the Zendesk API for customer support. To use the app, a user first signs up. After signup, the user can then make tickets that go to the Zendesk backend. Provided the user is logged in, the user can view its existing tickets and update its tickets with comments. 
+This is a sample Rails app that uses the official Ruby Zendesk API Client for customer support. To use the app, users first sign up. After signup, users can then make tickets that go to the Zendesk backend. Provided users are logged in, they can view their existing tickets and update their tickets with comments. 
 
-User authentication was made from scratch, implementing the bcrypt-ruby gem and ActiveModel's <tt>has_secure_password</tt>. Updating the tickets and setting password of users upon creation is handled with <tt>Net::HTTP</tt> requests. Bootstrap and Sass is used for styling. The app has a test suite written with RSpec and Capybara, and ties RSpec with Guard and Spork for faster, automated tests, along with FactoryGirl in place of fixtures. The production database uses PostGreSQL.
+User authentication was made from scratch, implementing the bcrypt-ruby gem and ActiveModel's <tt>has_secure_password</tt>. Updating the tickets and setting password of users upon creation is handled with <tt>Net::HTTP</tt> requests. Bootstrap and Sass is used for styling. The app has a test suite written with RSpec and Capybara, and ties RSpec with Guard and Spork for faster automated tests, along with FactoryGirl in place of fixtures. The production database uses PostgreSQL.
 
 === Setup
 
@@ -22,11 +22,10 @@ A Zendesk account will be necessary to run the app, along with an API token. Thi
   touch config/local_env.yml
 
 <b>Set the variables in local_env.yml</b>
-  ZD_URL: "https://yoursubdomain.zendesk.com"
+  ZD_URL: "https://yoursubdomain.zendesk.com/api/v2"
   ZD_USER: "your@email.com"
   ZD_PASS: "yourpassword"
   ZD_TOKEN: "yourapitoken"
-  ZD_DOMAIN: "yoursubdomain"
 
 <b>Load the environment variables in your config/application.rb file</b>
   config.before_configuration do

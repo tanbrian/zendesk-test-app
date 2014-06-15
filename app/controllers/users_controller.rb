@@ -5,6 +5,7 @@ require 'net/https'
 require 'open-uri'
 
 class UsersController < ApplicationController
+  include ApplicationHelper
 
   def new
     @user = User.new
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
       @new_user = ZendeskAPI::User.create(client, options)
       @id = @new_user.id
 
-      uri = URI.parse "https://#{ENV['ZD_DOMAIN']}.zendesk.com/api/v2/users/#{@id}/password.json"
+      uri = URI.parse "https://#{ subdomain_from_url ENV['ZD_URL'] }.zendesk.com/api/v2/users/#{@id}/password.json"
       http = Net::HTTP.new uri.host, uri.port
       http.use_ssl = true
       req = Net::HTTP::Put.new uri.request_uri

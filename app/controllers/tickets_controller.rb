@@ -6,6 +6,8 @@ require 'open-uri'
 require 'base64'
 
 class TicketsController < ApplicationController
+  include ApplicationHelper
+
   before_action :signin_user 
   before_filter :get_current_user
 
@@ -48,7 +50,7 @@ class TicketsController < ApplicationController
   private
 
   def comment_as_end_user(id, email, comment)
-    uri = URI.parse "https://#{ENV['ZD_DOMAIN']}.zendesk.com/api/v2/requests/#{id}.json"
+    uri = URI.parse "https://#{ subdomain_from_url ENV['ZD_URL'] }.zendesk.com/api/v2/requests/#{id}.json"
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
     req = Net::HTTP::Put.new(uri.request_uri) 
