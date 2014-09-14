@@ -43,6 +43,6 @@ This app also uses a database to hold the information of signed-up users.
 
 And that's it! Email me if you have any questions.
 
-=== License and Copyright 
+=== License 
 
-This software is licensed under the terms of the MIT License. Copyright © 2014 Brian Tan.
+This software is licensed under the terms of the MIT License.
